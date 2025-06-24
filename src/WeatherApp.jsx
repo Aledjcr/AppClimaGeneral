@@ -7,9 +7,10 @@ export const WeatherApp = () => {
     const [weatherData, setWeatherData] = useState(null)
 
     const urlBase = 'https://api.openweathermap.org/data/2.5/weather'
-    const API_KEY = 'process.env.API_KEY' 
+    const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY
     const difKelvin = 273.15 // Para lograr obtener grados Celsious debemos restar este número a los grados Kelvin
-
+    
+    
     const fetchWeatherData = async () => {
         try {
             const response = await fetch(`${urlBase}?q=${city}&appid=${API_KEY}&lang=es`)
