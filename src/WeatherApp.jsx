@@ -18,7 +18,7 @@ export const WeatherApp = () => {
             console.log(data)
             setWeatherData(data)
         } catch (error) {
-            console.error('Ha habido un error: ', error)
+            console.error('Ha ocurrido un error: ', error)
         }
     }
 
@@ -34,11 +34,11 @@ export const WeatherApp = () => {
 
     return (
         <div className="container">
-            <h1>Aplicación de Clima</h1>
+            <h1>Quiero saber el clima en:</h1>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    placeholder="Ingresa una ciudad"
+                    placeholder="Ingresa una ciudad o país"
                     value={city}
                     onChange={handleCityChange}
                 />
@@ -49,8 +49,9 @@ export const WeatherApp = () => {
 
                 <div>
                     <h2>{weatherData.name}, {weatherData.sys.country}</h2>
-                    <p>La temperatura actual es {Math.floor(weatherData.main.temp - difKelvin)}ºC</p>
-                    <p>La condición meteorológica actual: {weatherData.weather[0].description}</p>
+                    <p>La temperatura actual es </p><br />
+                    <p className='temp'>{Math.round(weatherData.main.temp - difKelvin)}°C</p>
+                    <p>Condición meteorológica actual: {weatherData.weather[0].description}</p>
                     <img
                         src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
                         alt={weatherData.weather[0].description}

@@ -1,7 +1,12 @@
 .container {
+
+    background: radial-gradient(circle, rgba(34, 35, 44, 0.397) 0%, rgba(44, 106, 131, 0.1) 100%);
     max-width: 60%;
     margin: 0 auto;
     padding: 20px;
+    border-radius: 20px;
+    margin-top:200px;
+
 }
 
 
@@ -16,13 +21,18 @@ form {
 }
 
 input[type="text"] {
+    font-size: larger;
+    font-weight: bold;
     flex: 1;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    text-align: center;
+
 }
 
 button {
+    font-size: medium;
     padding: 10px 20px;
     background-color: rgb(40, 97, 163);
     color: white;
@@ -30,14 +40,17 @@ button {
     border: 4px;
     cursor: pointer;
     transition: 1s all ease;
+    border-radius: 20px;
+    margin-left: 10px;
 }
 
 button:hover {
-    background-color: rgb(83, 151, 230);
+    border-radius: 20px;
+    background-color: rgba(137, 172, 212, 0.767);
 }
 
 h2 {
-    font-size: 30px;
+    font-size: 40px;;
 }
 
 h1,h2{
@@ -45,9 +58,18 @@ h1,h2{
 }
 
 p {
+
+    font-size: 20px;
     margin-bottom: 5px;
     color: white;
 }
+
+.temp {
+    font-size: 90px;
+    color: rgb(247, 202, 151);
+    margin-top: 10px;
+}
+
 
 img{
     width: 100px;

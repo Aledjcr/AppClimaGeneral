@@ -3,5 +3,6 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    background-color: rgb(3, 130, 185);
-}
+    background: radial-gradient(circle, #5cc9ff, #145a83e1);
+
+}   
