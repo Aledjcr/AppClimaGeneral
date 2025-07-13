@@ -6,7 +6,7 @@ export const WeatherApp = () => {
     const [city, setCity] = useState('')
     const [weatherData, setWeatherData] = useState(null)
     const [error, setError] = useState(null) // Estado para manejar posibles errores, si tipean mal la cuidad o ponen  algun dato invalido.
-    const difKelvin = 273.15
+
 
     const getWeather = async (city) => {
         setError(null) // Limpia errores previos
@@ -55,7 +55,7 @@ export const WeatherApp = () => {
                 <div>
                     <h2>{weatherData.name}, {weatherData.sys.country}</h2>
                     <p>La temperatura actual es </p><br />
-                    <p className='temp'>{Math.round(weatherData.main.temp - difKelvin)}°C</p>
+                    <p className='temp'>{Math.round(weatherData.main.temp)}°C</p>
                     <p>Condición meteorológica actual: {weatherData.weather[0].description}</p>
                     <img
                         src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
