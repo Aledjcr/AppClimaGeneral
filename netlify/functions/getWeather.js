@@ -1,9 +1,11 @@
+// Funcion creada para hacer la consulta 
+
 import { get } from 'axios';
 
 export async function handler (event) {
   const city = event.queryStringParameters.city;
 
-  const API_KEY = process.env.WEATHER_API_KEY;
+  const API_KEY = process.env.VITE_OPENWEATHER_API_KEY;
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=es`;
 
   try {
