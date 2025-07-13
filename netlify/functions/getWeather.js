@@ -1,21 +1,28 @@
 // Funcion creada para hacer la consulta 
-import axios from 'axios';
-
-export async function handler (event) {
+export async function handler(event) {
   const city = event.queryStringParameters.city;
+  const API_KEY = process.env.VITE_OPENWEATHER_API_KEY; // Asegúrate de definir tu API_KEY aquí
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=es`;
 
   try {
-    const response = await axios.get(url);
-    return {
-      statusCode: 200,
-      body: JSON.stringify(response.data),
-    };
+    const response = await fetch(url);
+    const data = await response.json();
+    if (response.ok) {
+      return {
+        statusCode: 200,
+        body: JSON.stringify(data),
+      };
+    } else {
+      return {
+        statusCode: response.status,
+        body: JSON.stringify({ error: data.message || 'Error al obtener el clima' }),
+      };
+    }
   } catch (error) {
     return {
-      statusCode: error.response?.status || 500,
-      body: JSON.stringify({ error: 'Error al obtener el clima' }),
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Error de red o del servidor' }),
     };
   }
 }
