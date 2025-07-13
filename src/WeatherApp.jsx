@@ -5,23 +5,25 @@ export const WeatherApp = () => {
 
     const [city, setCity] = useState('')
     const [weatherData, setWeatherData] = useState(null)
+    const [error, setError] = useState(null) // Estado para manejar posibles errores, si tipean mal la cuidad o ponen  algun dato invalido.
+    const difKelvin = 273.15
 
-    const urlBase = 'https://api.openweathermap.org/data/2.5/weather'
-    const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY
-    const difKelvin = 273.15 // Para lograr obtener grados Celsious debemos restar este número a los grados Kelvin
-    
-    
-    const fetchWeatherData = async () => {
+    const getWeather = async (city) => {
+        setError(null) // Limpia errores previos
+        setWeatherData(null) // Limpiar datos previos
         try {
-            const response = await fetch(`${urlBase}?q=${city}&appid=${API_KEY}&lang=es`)
-            const data = await response.json()
-            console.log(data)
-            setWeatherData(data)
-        } catch (error) {
-            console.error('Ha ocurrido un error: ', error)
+            const res = await fetch(`/.netlify/functions/getWeather?city=${city}`);
+            const data = await res.json();
+            if (res.ok && !data.error) {
+                setWeatherData(data);
+                setCity('') // Limpiar input tras éxito
+            } else {
+                setError('Ciudad no encontrada o error en la consulta');
+            }
+        } catch (e) {
+            setError('Error de red o del servidor');
         }
     }
-
 
     const handleCityChange = (event) => {
         setCity(event.target.value)
@@ -29,7 +31,7 @@ export const WeatherApp = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        fetchWeatherData()
+        getWeather(city)
     }
 
     return (
@@ -45,8 +47,11 @@ export const WeatherApp = () => {
                 <button type="submit">Buscar</button>
             </form>
 
-            {weatherData && (
+            {error && (
+                <div className="error">{error}</div>
+            )}
 
+            {weatherData && (
                 <div>
                     <h2>{weatherData.name}, {weatherData.sys.country}</h2>
                     <p>La temperatura actual es </p><br />
@@ -57,8 +62,6 @@ export const WeatherApp = () => {
                         alt={weatherData.weather[0].description}
                     />
                 </div>
-
-
             )}
 
         </div>
